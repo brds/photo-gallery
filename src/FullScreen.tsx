@@ -19,7 +19,7 @@ export default function FullScreen(props: Props) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <Img alt="Random picture from picsum.photos" layout src={src} />
+            <Img alt="Random picture from picsum.photos" src={src} />
           </Backdrop>
         )}
       </AnimatePresence>
