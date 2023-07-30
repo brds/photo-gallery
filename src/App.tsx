@@ -34,7 +34,6 @@ const Page = styled.main`
   min-height: 100vh;
   width: 100%;
   align-items: center;
-  scrollbar-gutter: stable;
 `;
 
 const Header = styled.header`
