@@ -1,13 +1,15 @@
-import React from "react";
+import { useState } from "react";
 import { styled } from "styled-components";
 import Photo from "./Photo";
 import Switch from "./Switch";
 import { motion } from "framer-motion";
+import FullScreen from "./FullScreen";
 
 export default function App() {
-  const list = Array.from({ length: 4 * 4 }, (_, i) => i);
+  const list = Array.from({ length: 4 * 10 }, (_, i) => i);
 
-  const [grid, setGrid] = React.useState(false);
+  const [grid, setGrid] = useState(false);
+  const [fullScreenSrc, setFullScreenSrc] = useState<string>();
 
   return (
     <Page>
@@ -16,14 +18,19 @@ export default function App() {
       </Header>
       <List data-isgrid={grid} layout="position" transition={{ duration: 1 }}>
         {list.map((i) => (
-          <Photo key={i} index={i} />
+          <Photo key={i} index={i} updateFullScreenSrc={setFullScreenSrc} />
         ))}
       </List>
+
+      <FullScreen
+        close={() => setFullScreenSrc(undefined)}
+        src={fullScreenSrc}
+      />
     </Page>
   );
 }
 
-const Page = styled.div`
+const Page = styled.main`
   min-height: 100vh;
   width: 100%;
   align-items: center;
@@ -37,7 +44,7 @@ const Header = styled.header`
   background: var(--surface);
   padding: 12px;
   display: flex;
-  z-index: 1;
+  z-index: var(--z-index-header);
 `;
 
 const List = styled(motion.div)`
